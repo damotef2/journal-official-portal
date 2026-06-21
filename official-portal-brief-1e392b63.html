@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>再次遇见 · 澳客</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f7f5f2;
+            color: #2c2b28;
+            line-height: 1.7;
+            letter-spacing: 0.012em;
+        }
+
+        /* 深色头图，氛围静默 */
+        .hero {
+            background: #1f1e1b;
+            background-image: radial-gradient(circle at 20% 30%, #3a3833, #141310 90%);
+            color: #eae6df;
+            padding: 6rem 1.5rem 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ba9f7b, transparent);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.4rem, 6vw, 4rem);
+            font-weight: 350;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero .sub {
+            font-size: 1.05rem;
+            color: #c6b8a5;
+            max-width: 640px;
+            margin: 0.8rem auto 0;
+            font-weight: 320;
+            line-height: 1.6;
+        }
+
+        .hero .sub em {
+            font-style: normal;
+            background: rgba(186, 159, 123, 0.18);
+            padding: 0 0.3rem;
+            border-radius: 2px;
+        }
+
+        /* 正文区——浅色，留白 */
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 3.2rem 1.5rem 4rem;
+        }
+
+        .opening {
+            font-size: 1.08rem;
+            margin-bottom: 2.4rem;
+            border-left: 2px solid #d5c9b8;
+            padding-left: 1.2rem;
+            color: #3d3a34;
+        }
+
+        .opening p {
+            margin-bottom: 0.8rem;
+        }
+
+        /* 承接段落 */
+        .section-block {
+            margin-bottom: 3rem;
+        }
+
+        .section-block h2 {
+            font-size: 1.5rem;
+            font-weight: 380;
+            letter-spacing: 0.02em;
+            color: #2c2b28;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid #e0d7cb;
+            padding-bottom: 0.25rem;
+            display: inline-block;
+        }
+
+        .section-block p {
+            margin-bottom: 1rem;
+        }
+
+        /* 特点列表 —— 温和卡片 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 2rem 0 1.8rem;
+        }
+
+        .feature-card {
+            background: #ffffffec;
+            border-radius: 14px;
+            padding: 1.4rem 1.2rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02), 0 8px 18px rgba(0,0,0,0.03);
+            transition: box-shadow 0.2s, transform 0.15s;
+            border: 1px solid #edeae5;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+            transform: translateY(-2px);
+            border-color: #d6cdbe;
+        }
+
+        .feature-card .icon {
+            font-size: 1.5rem;
+            display: inline-block;
+            margin-bottom: 0.3rem;
+            color: #a58d74;
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 450;
+            color: #2c2b28;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.01em;
+        }
+
+        .feature-card p {
+            font-size: 0.92rem;
+            color: #56534c;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* 内嵌链接 —— 强调色 */
+        a {
+            color: #8b6f50;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s, color 0.15s;
+            font-weight: 420;
+        }
+
+        a:hover {
+            color: #6d4f2e;
+            border-bottom-color: #b29573;
+        }
+
+        /* 场景引用，叙述感 */
+        .narrative-note {
+            background: #f0ece7;
+            padding: 1.4rem 1.6rem;
+            border-radius: 18px;
+            margin: 2.2rem 0;
+            color: #3b3730;
+        }
+
+        .narrative-note p {
+            margin-bottom: 0.5rem;
+        }
+
+        .narrative-note p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 温和结尾 + 收藏提示 */
+        .gentle-closing {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #dfd7cc;
+        }
+
+        .gentle-closing p {
+            margin-bottom: 0.75rem;
+        }
+
+        .bookmark-hint {
+            background: transparent;
+            border: 1px dashed #c0b3a1;
+            border-radius: 40px;
+            padding: 0.5rem 1.2rem;
+            display: inline-block;
+            font-size: 0.9rem;
+            color: #6b5f4e;
+            letter-spacing: 0.02em;
+            margin-top: 0.6rem;
+        }
+
+        .faq-mini {
+            margin-top: 2.8rem;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.9rem;
+            border-bottom: 1px solid #e4ddd3;
+            padding-bottom: 0.6rem;
+        }
+
+        .faq-mini summary {
+            font-weight: 430;
+            cursor: pointer;
+            color: #3c3831;
+            font-size: 1rem;
+            padding: 0.3rem 0;
+        }
+
+        .faq-mini summary::-webkit-details-marker {
+            color: #b1977b;
+        }
+
+        .faq-mini p {
+            margin: 0.6rem 0 0.2rem 0.8rem;
+            font-size: 0.94rem;
+            color: #555049;
+        }
+
+        /* 响应式细化 */
+        @media (max-width: 600px) {
+            .hero {
+                padding: 4rem 1.2rem 3.5rem;
+            }
+
+            .container {
+                padding: 2rem 1.2rem 3rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
+            }
+
+            .feature-card {
+                padding: 1.2rem 1rem;
+            }
+
+            .opening {
+                padding-left: 1rem;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .hero {
+                padding: 7rem 2rem 5.5rem;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem 2.5rem;
+            color: #7c7468;
+            font-size: 0.82rem;
+            border-top: 1px solid #e4ddd3;
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        footer a {
+            color: #7c6b58;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <h1>澳客</h1>
+        <div class="sub">
+            再次打开，像翻开一本读过一半的书。<br>
+            有些页面值得重新标记，有些收藏会随季节生长。
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- 开场短句：从再次访问切入 -->
+        <div class="opening">
+            <p>浏览器的书签栏里藏着许多“改天再去”的角落。那天傍晚我整理收藏夹，看见一个名字：<a href="https://official-portal-aoke.com">澳客</a>。点进去，页面还是熟悉的安静底色，但内容比我记忆里多了一片新的侧栏。它一直在更新，只是我忘了回来看。</p>
+        </div>
+
+        <!-- 承接段落：收藏 & 持续关注 -->
+        <div class="section-block">
+            <h2>收藏，也是一种注视</h2>
+            <p>收藏夹不只是链接的仓库。有些站点你收藏之后便不再打开，有些却会在某个寻常的午后被你重新点开，然后发现它早已不是你上次见到的样子。<a href="https://official-portal-aoke.com">澳客</a> 就属于后一种——它不喧哗，但一直在那里，悄悄地调整着颜色和秩序。</p>
+            <p>持续关注并不是件容易的事，尤其是当信息像潮水一样涌来。但有些地方值得你每隔几周回去看一眼，哪怕只是确认它还保持着那种让人舒服的节奏。</p>
+        </div>
+
+        <!-- 特点列表：温和，不夸张 -->
+        <div class="section-block">
+            <h2>它身上的一些细节</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="icon">◈</div>
+                    <h3>不追赶时间</h3>
+                    <p>页面加载很快，但没有那种急迫的催促感。文字和留白都刚刚好，像一间开在巷子里的阅览室。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">◈</div>
+                    <h3>收藏夹老朋友</h3>
+                    <p>它的结构变动很小，每次回来都能立刻找到上次停留的地方。这种稳定性在今天的网络上反而显得珍贵。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">◈</div>
+                    <h3>信息有呼吸感</h3>
+                    <p>没有弹窗横幅，没有倒计时。列表与段落之间留着充分的间距，读起来不费眼力。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">◈</div>
+                    <h3>温和的延续性</h3>
+                    <p>从深色头图过渡到浅色正文，再到那些不刺眼的强调链接，整个色调像一间被午后阳光照亮的屋子。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 叙述感场景：“比如那天” -->
+        <div class="narrative-note">
+            <p>比如那天，我本来只是想确认一个旧链接是否还活着。结果在 <a href="https://official-portal-aoke.com">澳客</a> 的副栏里读到了一篇关于信息整理习惯的短文，措辞平淡，但观点却很实在。我把它加了书签，顺手清理了另外十来个失效的链接。</p>
+            <p>有时候持续关注不是为了获取更多，而是为了保留一种触感——你知道某个地方还在，并且保持着它自己的节奏。</p>
+        </div>
+
+        <!-- 温和结尾 + 收藏提示 -->
+        <div class="gentle-closing">
+            <p>如果你也曾在某个时刻把它收进书签，不妨找个安静的时间再打开看看。它可能没有翻天覆地的变化，但那种沉着的存在感，本身就是一种值得回访的理由。</p>
+            <p>把这个页面加入书签，或者在心里记下它的名字。过几周，或几个月，再回来——它大概率还在，而且可能多了一点你未曾留意的东西。</p>
+            <div class="bookmark-hint">⇥ 书签栏 · 一个不会消失的坐标</div>
+        </div>
+
+        <!-- FAQ 摘要 —— 克制、真实 -->
+        <div class="faq-mini">
+            <details>
+                <summary>这个页面会经常改版吗？</summary>
+                <p>不会。结构会保持稳定，更新主要以内容补充和细节优化为主，不会突然更换布局或风格。</p>
+            </details>
+            <details>
+                <summary>为什么强调“收藏”和“持续关注”？</summary>
+                <p>因为很多好站点被收藏后就再也没被打开过。我们觉得，偶尔回访本身就成了一种支持——让你在意的地方继续存在。</p>
+            </details>
+            <details>
+                <summary>我可以把链接分享给朋友吗？</summary>
+                <p>当然。直接分享 <a href="https://official-portal-aoke.com">澳客</a> 这个地址就好，不需要额外说明。</p>
+            </details>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>重新打开，像翻开一本读过一半的书。</p>
+        <p style="margin-top:0.4rem;"><a href="https://official-portal-aoke.com">澳客</a> · 持续存在，不疾不徐</p>
+    </footer>
+
+</body>
+</html>
